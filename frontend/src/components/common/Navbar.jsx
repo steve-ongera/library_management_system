@@ -24,8 +24,7 @@ export default function Navbar({ sidebarCollapsed, onToggleSidebar }) {
   };
 
   const goToProfile = () => {
-    const profilePath = isLibrarian ? '/librarian/profile' : '/student/profile';
-    navigate(profilePath);
+    navigate(isLibrarian ? '/librarian/profile' : '/student/profile');
     setDropdownOpen(false);
   };
 
@@ -33,15 +32,15 @@ export default function Navbar({ sidebarCollapsed, onToggleSidebar }) {
 
   return (
     <header className={`navbar ${sidebarCollapsed ? 'sidebar-collapsed' : ''}`}>
+
+      {/* ── Left ─────────────────────────────────────────── */}
       <div className="navbar-left">
-        {/* Hamburger */}
         <button className="hamburger" onClick={onToggleSidebar} aria-label="Toggle sidebar">
-          {sidebarCollapsed ? '☰' : '✕'}
+          <i className={`bi ${sidebarCollapsed ? 'bi-list' : 'bi-x-lg'}`} />
         </button>
 
-        {/* Search */}
         <div className="navbar-search">
-          <span className="search-icon">🔍</span>
+          <i className="bi bi-search search-icon" />
           <input
             type="search"
             placeholder="Search books, students…"
@@ -56,21 +55,20 @@ export default function Navbar({ sidebarCollapsed, onToggleSidebar }) {
         </div>
       </div>
 
+      {/* ── Right ────────────────────────────────────────── */}
       <div className="navbar-right">
-        {/* Notifications placeholder */}
         <button className="nav-icon-btn" title="Notifications">
-          🔔
+          <i className="bi bi-bell" />
           <span className="badge" />
         </button>
 
-        {/* User menu */}
         <div className="user-menu" ref={dropdownRef}>
           <div
             className="user-avatar"
             onClick={() => setDropdownOpen(!dropdownOpen)}
             title={`${user?.first_name} ${user?.last_name}`}
           >
-            {initials || '?'}
+            {initials || <i className="bi bi-person-fill" />}
           </div>
 
           {dropdownOpen && (
@@ -79,15 +77,24 @@ export default function Navbar({ sidebarCollapsed, onToggleSidebar }) {
                 <div className="name">{user?.first_name} {user?.last_name}</div>
                 <div className="role">{user?.role} · {user?.username}</div>
               </div>
+
               <div className="user-dropdown-item" onClick={goToProfile}>
-                <span>👤</span> My Profile
+                <i className="bi bi-person-circle" /> My Profile
               </div>
-              <div className="user-dropdown-item" onClick={() => { navigate(isLibrarian ? '/librarian/dashboard' : '/student/dashboard'); setDropdownOpen(false); }}>
-                <span>🏠</span> Dashboard
+              <div
+                className="user-dropdown-item"
+                onClick={() => {
+                  navigate(isLibrarian ? '/librarian/dashboard' : '/student/dashboard');
+                  setDropdownOpen(false);
+                }}
+              >
+                <i className="bi bi-house-door" /> Dashboard
               </div>
+
               <hr style={{ margin: '4px 0', border: 'none', borderTop: '1px solid #e2e8f0' }} />
+
               <div className="user-dropdown-item danger" onClick={handleLogout}>
-                <span>🚪</span> Logout
+                <i className="bi bi-box-arrow-right" /> Logout
               </div>
             </div>
           )}

@@ -2,47 +2,71 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 
 const studentNav = [
-  { section: 'Main', items: [
-    { path: '/student/dashboard', icon: '🏠', label: 'Dashboard' },
-    { path: '/student/books', icon: '📚', label: 'Browse Books' },
-    { path: '/student/my-books', icon: '📖', label: 'My Books' },
-    { path: '/student/reservations', icon: '🔖', label: 'Reservations' },
-  ]},
-  { section: 'Finance', items: [
-    { path: '/student/fines', icon: '💳', label: 'My Fines' },
-    { path: '/student/transactions', icon: '📋', label: 'Transactions' },
-  ]},
-  { section: 'More', items: [
-    { path: '/student/announcements', icon: '📢', label: 'Announcements' },
-    { path: '/student/profile', icon: '👤', label: 'Profile' },
-  ]},
+  {
+    section: 'Main',
+    items: [
+      { path: '/student/dashboard',     icon: 'bi-house-door-fill',       label: 'Dashboard' },
+      { path: '/student/books',         icon: 'bi-journals',              label: 'Browse Books' },
+      { path: '/student/my-books',      icon: 'bi-book-half',             label: 'My Books' },
+      { path: '/student/reservations',  icon: 'bi-bookmark-star',         label: 'Reservations' },
+    ],
+  },
+  {
+    section: 'Finance',
+    items: [
+      { path: '/student/fines',         icon: 'bi-credit-card-2-front',   label: 'My Fines' },
+      { path: '/student/transactions',  icon: 'bi-receipt',               label: 'Transactions' },
+    ],
+  },
+  {
+    section: 'More',
+    items: [
+      { path: '/student/announcements', icon: 'bi-megaphone',             label: 'Announcements' },
+      { path: '/student/profile',       icon: 'bi-person-circle',         label: 'Profile' },
+    ],
+  },
 ];
 
 const librarianNav = [
-  { section: 'Overview', items: [
-    { path: '/librarian/dashboard', icon: '🏠', label: 'Dashboard' },
-    { path: '/librarian/announcements', icon: '📢', label: 'Announcements' },
-  ]},
-  { section: 'Catalog', items: [
-    { path: '/librarian/books', icon: '📚', label: 'Books' },
-    { path: '/librarian/categories', icon: '🗂️', label: 'Categories' },
-    { path: '/librarian/authors', icon: '✍️', label: 'Authors' },
-  ]},
-  { section: 'Circulation', items: [
-    { path: '/librarian/borrowings', icon: '📤', label: 'Borrowings' },
-    { path: '/librarian/issue', icon: '➕', label: 'Issue Book' },
-    { path: '/librarian/return', icon: '↩️', label: 'Return Book' },
-    { path: '/librarian/overdue', icon: '⚠️', label: 'Overdue' },
-    { path: '/librarian/reservations', icon: '🔖', label: 'Reservations' },
-  ]},
-  { section: 'Finance', items: [
-    { path: '/librarian/fines', icon: '💰', label: 'Fines' },
-    { path: '/librarian/transactions', icon: '💳', label: 'Transactions' },
-  ]},
-  { section: 'Users', items: [
-    { path: '/librarian/students', icon: '👨‍🎓', label: 'Students' },
-    { path: '/librarian/profile', icon: '👤', label: 'Profile' },
-  ]},
+  {
+    section: 'Overview',
+    items: [
+      { path: '/librarian/dashboard',      icon: 'bi-speedometer2',           label: 'Dashboard' },
+      { path: '/librarian/announcements',  icon: 'bi-megaphone',              label: 'Announcements' },
+    ],
+  },
+  {
+    section: 'Catalog',
+    items: [
+      { path: '/librarian/books',       icon: 'bi-journals',               label: 'Books' },
+      { path: '/librarian/categories',  icon: 'bi-grid-3x3-gap',           label: 'Categories' },
+      { path: '/librarian/authors',     icon: 'bi-person-lines-fill',      label: 'Authors' },
+    ],
+  },
+  {
+    section: 'Circulation',
+    items: [
+      { path: '/librarian/borrowings',   icon: 'bi-arrow-left-right',        label: 'Borrowings' },
+      { path: '/librarian/issue',        icon: 'bi-box-arrow-up-right',      label: 'Issue Book' },
+      { path: '/librarian/return',       icon: 'bi-box-arrow-in-down-left',  label: 'Return Book' },
+      { path: '/librarian/overdue',      icon: 'bi-exclamation-triangle',    label: 'Overdue' },
+      { path: '/librarian/reservations', icon: 'bi-bookmark-check',          label: 'Reservations' },
+    ],
+  },
+  {
+    section: 'Finance',
+    items: [
+      { path: '/librarian/fines',        icon: 'bi-cash-coin',              label: 'Fines' },
+      { path: '/librarian/transactions', icon: 'bi-credit-card',            label: 'Transactions' },
+    ],
+  },
+  {
+    section: 'Users',
+    items: [
+      { path: '/librarian/students', icon: 'bi-mortarboard',               label: 'Students' },
+      { path: '/librarian/profile',  icon: 'bi-person-badge',              label: 'Profile' },
+    ],
+  },
 ];
 
 export default function Sidebar({ collapsed, onClose }) {
@@ -53,9 +77,12 @@ export default function Sidebar({ collapsed, onClose }) {
   return (
     <>
       <aside className={`sidebar ${collapsed ? 'collapsed' : ''}`}>
-        {/* Logo */}
+
+        {/* ── Logo ─────────────────────────────── */}
         <div className="sidebar-logo">
-          <div className="logo-icon">📚</div>
+          <div className="logo-icon">
+            <i className="bi bi-book-fill" />
+          </div>
           {!collapsed && (
             <div className="logo-text">
               UniLibrary
@@ -64,7 +91,7 @@ export default function Sidebar({ collapsed, onClose }) {
           )}
         </div>
 
-        {/* Navigation */}
+        {/* ── Nav ──────────────────────────────── */}
         <nav className="sidebar-nav">
           {navItems.map(({ section, items }) => (
             <div key={section}>
@@ -72,7 +99,8 @@ export default function Sidebar({ collapsed, onClose }) {
                 <div className="nav-section-label">{section}</div>
               )}
               {items.map(({ path, icon, label, badge }) => {
-                const isActive = location.pathname === path ||
+                const isActive =
+                  location.pathname === path ||
                   location.pathname.startsWith(path + '/');
                 return (
                   <NavLink
@@ -82,7 +110,7 @@ export default function Sidebar({ collapsed, onClose }) {
                     onClick={onClose}
                     title={collapsed ? label : undefined}
                   >
-                    <span className="nav-icon">{icon}</span>
+                    <i className={`bi ${icon} nav-icon`} />
                     {!collapsed && <span className="nav-label">{label}</span>}
                     {!collapsed && badge > 0 && (
                       <span className="nav-badge">{badge}</span>
@@ -94,11 +122,11 @@ export default function Sidebar({ collapsed, onClose }) {
           ))}
         </nav>
 
-        {/* Footer - User info */}
+        {/* ── Footer ───────────────────────────── */}
         <div className="sidebar-footer">
           {!collapsed ? (
             <div className="nav-item" style={{ cursor: 'default' }}>
-              <div className="user-avatar" style={{ width: 32, height: 32, fontSize: 13 }}>
+              <div className="user-avatar" style={{ width: 32, height: 32, fontSize: 13, flexShrink: 0 }}>
                 {user?.first_name?.[0]}{user?.last_name?.[0]}
               </div>
               <div style={{ overflow: 'hidden' }}>
@@ -120,7 +148,7 @@ export default function Sidebar({ collapsed, onClose }) {
         </div>
       </aside>
 
-      {/* Mobile overlay */}
+      {/* Mobile backdrop */}
       <div
         className={`mobile-overlay ${!collapsed ? 'show' : ''}`}
         onClick={onClose}
